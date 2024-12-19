@@ -39,7 +39,15 @@ File: utils/fetch.js (113 lines, 3025 bytes)
    `pip install -r requirements.txt`
    
 2. Run the Script:
-   `python extract_repo.py --repo <GitHub URL or local path> --output <output_file> [--exclude pattern] [--select pattern] [--json]`
+```
+python3 src/main.py \
+    --repo "https://github.com/user/repo" \
+    --output "output.txt" \
+    --exclude "*.md" "*.png" \
+    --select "*.py" \
+    --branch "main" \
+    --verbose
+```
 
 ## Examples:
 - Clone a GitHub repo and extract only .py files:
@@ -53,11 +61,11 @@ File: utils/fetch.js (113 lines, 3025 bytes)
                          --output "flattened.txt"
 
 ## Options:
-`--repo`: GitHub repository URL or local repository path.
-`--output`: Path to the resulting flattened text file.
-`--select`: File patterns to include (e.g., --select "*.py").
-`--exclude`: File patterns to exclude (e.g., --exclude "tests/*").
-`--json`: (Optional) Outputs metadata in JSON format.
+- `--repo`: GitHub repository URL or local repository path.
+- `--output`: Path to the resulting flattened text file.
+- `--select`: File patterns to include (e.g., --select "*.py").
+- `--exclude`: File patterns to exclude (e.g., --exclude "tests/*").
+- `--json`: (Optional) Outputs metadata in JSON format.
    
 ## Future Enhancements
 - **RAG Integration:** Utilize the flattened output as a knowledge base for retrieval-augmented question answering.

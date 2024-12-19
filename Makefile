@@ -8,7 +8,7 @@ help:
 
 # Example: run against a remote repository
 run_remote:
-	python3 extract_repo.py \
+	python3 src/main.py \
 	    --repo "https://github.com/user/repo" \
 	    --output "output.txt" \
 	    --exclude "*.md" "*.png" \
@@ -18,7 +18,7 @@ run_remote:
 
 # Example: run against a local directory
 run_local:
-	python3 extract_repo.py \
+	python3 src/main.py \
 	    --repo "/path/to/local/repo" \
 	    --output "output.txt" \
 	    --exclude "*.md" \
