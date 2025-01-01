@@ -30,8 +30,8 @@ env/
 # Jupyter notebooks checkpoints
 .ipynb_checkpoints/
 
-# Output files
-output.txt
+# Output directory
+output
 
 # OS-specific files
 .DS_Store

@@ -1,29 +1,32 @@
-.PHONY: help run_remote run_local clean
+.PHONY: help run clean
 
 help:
 	@echo "Available targets:"
-	@echo "  make run_remote   - Run against a remote GitHub repository"
-	@echo "  make run_local    - Run against a local repository directory"
-	@echo "  make clean        - Remove the generated output file"
+	@echo "  make run     - Clone/scan a remote repository with defaults"
+	@echo "  make clean   - Remove the entire output folder"
 
-# Example: run against a remote repository
-run_remote:
-	python3 src/main.py \
-	    --repo "https://github.com/user/repo" \
-	    --output "output.txt" \
-	    --exclude "*.md" "*.png" \
-	    --select "*.py" \
-	    --branch "main" \
+REPO_URL ?= https://github.com/virattt/ai-hedge-fund
+
+# Patterns to exclude. Adjust or extend as needed.
+EXCLUDES = \
+	".github/workflows" \
+	"tests" \
+	".gitignore" \
+	"*.md" \
+	"*.lock" \
+	"*.toml" \
+	"*.pdg" \
+	"*.txt" \
+	"*.ini" \
+	"LICENSE" \
+
+# Run the script against a remote repository (by default REPO_URL),
+# excluding specified patterns and enabling verbose output.
+run:
+	python3 src/main.py "$(REPO_URL)" \
+	    --exclude $(EXCLUDES) \
 	    --verbose
 
-# Example: run against a local directory
-run_local:
-	python3 src/main.py \
-	    --repo "/path/to/local/repo" \
-	    --output "output.txt" \
-	    --exclude "*.md" \
-	    --verbose
-
+# Clean up all generated output folders/files
 clean:
-	rm -f output.txt
-
+	rm -rf output
