@@ -41,7 +41,7 @@ EXCLUDES = \
 # Run the script against a remote repository (by default REPO_URL),
 # excluding specified patterns and enabling verbose output.
 run:
-	python3 src/main_2.py "$(REPO_URL)" \
+	python3 src/main.py "$(REPO_URL)" \
 	    --exclude $(EXCLUDES) \
 	    --verbose \
 	    --ignore-hidden
