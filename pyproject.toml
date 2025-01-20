@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "repo-parser"
+name = "code-flattener"
 version = "0.1.0"
 description = ""
 authors = ["bellabe <bella.belgarokova@hotmail.com>"]
