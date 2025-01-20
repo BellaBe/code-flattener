@@ -312,16 +312,6 @@ def main():
         action="store_true",
         help="Ignore hidden files and directories (those starting with a dot)"
     )
-    # Optional: read exclude patterns from file
-    parser.add_argument(
-        "--exclude-from",
-        help="File containing exclusion patterns (one pattern per line)"
-    )
-    # Optional: read select patterns from file
-    parser.add_argument(
-        "--select-from",
-        help="File containing selection patterns (one pattern per line)"
-    )
 
     args = parser.parse_args()
 
@@ -329,33 +319,12 @@ def main():
     log_level = logging.DEBUG if args.verbose else logging.INFO
     logging.basicConfig(level=log_level, format="%(levelname)s: %(message)s")
 
-    # --- Load patterns from files if provided ---
-    exclude_patterns = args.exclude
-    if args.exclude_from:
-        try:
-            with open(args.exclude_from, "r", encoding="utf-8") as f:
-                file_excludes = [line.strip() for line in f if line.strip()]
-            exclude_patterns += file_excludes
-        except Exception as e:
-            logging.error(f"Failed to read exclude-from file: {e}")
-            sys.exit(1)
-
-    select_patterns = args.select
-    if args.select_from:
-        try:
-            with open(args.select_from, "r", encoding="utf-8") as f:
-                file_selects = [line.strip() for line in f if line.strip()]
-            select_patterns += file_selects
-        except Exception as e:
-            logging.error(f"Failed to read select-from file: {e}")
-            sys.exit(1)
-
     # --- Perform Extraction ---
     try:
         extract_repo_content(
             input_path=args.input_path,
-            exclude=exclude_patterns,
-            select=select_patterns,
+            exclude=args.exclude,
+            select=args.select,
             branch=args.branch,
             verbose=args.verbose,
             dry_run=args.dry_run,
@@ -364,7 +333,6 @@ def main():
     except Exception as e:
         logging.error(color_text(f"Error: {e}", RED))
         sys.exit(1)
-
 
 if __name__ == "__main__":
     main()
